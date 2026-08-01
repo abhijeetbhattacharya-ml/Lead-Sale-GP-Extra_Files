@@ -1,0 +1,46 @@
+# .forceignore v2
+# The .forceignore file doesn't adhere to .gitignore format which will be the default behavior starting in Spring '21 release. 
+# More information on .gitignore format here: https://git-scm.com/docs/gitignore. 
+# Fix the following lines in your .forceignore and add '# .forceignore v2' to your .forceignore file to switch to the new behavior.
+# Ignore all metadata files between force-app && dx-config
+
+**/jsconfig.json
+
+**/.eslintrc.json
+
+**/.gitkeep
+
+# Ignore all profiles except for our packaged ones
+*.profile
+!Geopointe Admin.profile
+!Geopointe End User.profile
+
+# Ignore CampaignMember Object and all fields except for Geocode__c
+# force:push
+**/objects/CampaignMember/CampaignMember.object-meta.xml
+**/objects/CampaignMember/fields/*.field-meta.xml
+!**/objects/CampaignMember/fields/Geocode__c.field-meta.xml
+# force:pull
+# **CampaignMember.object - example for ignoring everything on that object
+CampaignMember.object
+CampaignMember.field
+!CampaignMember.Geocode__c.field
+
+# Ignore Acvitiy object-meta.xml and all non packaged listviews
+# force:push
+**/objects/Activity/Activity.object-meta.xml
+**/objects/Activity/listViews/*.listView-meta.xml
+!**/objects/Activity/listViews/Geopointe_Activities_all.listView-meta.xml
+!**/objects/Activity/listViews/Geopointe_Activities_Last_7_Days.listView-meta.xml
+!**/objects/Activity/listViews/Geopointe_Activities_today.listView-meta.xml
+# force:pull
+Activity.object
+Activity.listView
+!Activity.Geopointe_Activities_all.listView
+!Activity.Geopointe_Activities_Last_7_Days.listView
+!Activity.Geopointe_Activities_today.listView
+
+# Named and External Credential files — managed manually in Setup
+# NOT deployed via metadata — they caused format errors
+**/namedCredentials/GeopointeScoringService*
+**/externalCredentials/GeopointeScoringService*
