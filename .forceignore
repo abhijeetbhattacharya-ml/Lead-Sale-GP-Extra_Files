@@ -44,3 +44,34 @@ Activity.listView
 # NOT deployed via metadata — they caused format errors
 **/namedCredentials/GeopointeScoringService*
 **/externalCredentials/GeopointeScoringService*
+
+# ─────────────────────────────────────────────────────
+# Scratch org stub fields — DO NOT deploy to corporate org.
+# These fields exist in corporate org with production
+# definitions. These stubs were created only for scratch
+# org compilation. Deploying these would OVERWRITE real
+# field definitions in production.
+# ─────────────────────────────────────────────────────
+
+# Lead stubs (7 fields)
+**/objects/Lead/fields/Salesforce_Edition__c.field-meta.xml
+**/objects/Lead/fields/Salesforce_Seats__c.field-meta.xml
+**/objects/Lead/fields/Employee_Range__c.field-meta.xml
+**/objects/Lead/fields/Job_Function__c.field-meta.xml
+**/objects/Lead/fields/Job_Level__c.field-meta.xml
+**/objects/Lead/fields/Role_Formula__c.field-meta.xml
+**/objects/Lead/fields/Lead_Category__c.field-meta.xml
+
+# Account stubs (12 fields)
+**/objects/Account/fields/Status__c.field-meta.xml
+**/objects/Account/fields/Employee_Range__c.field-meta.xml
+**/objects/Account/fields/Secondary_Industry__c.field-meta.xml
+**/objects/Account/fields/Sales_Team_Size__c.field-meta.xml
+**/objects/Account/fields/Current_ARR__c.field-meta.xml
+**/objects/Account/fields/Total_GeoPointe_ARR__c.field-meta.xml
+**/objects/Account/fields/ARR_GP__c.field-meta.xml
+**/objects/Account/fields/ARR_L11__c.field-meta.xml
+**/objects/Account/fields/Licensed_Users_GP__c.field-meta.xml
+**/objects/Account/fields/Licensed_Areas__c.field-meta.xml
+**/objects/Account/fields/NAICS_Code__c.field-meta.xml
+**/objects/Account/fields/Zoom_Clean_Technology_Products__c.field-meta.xml
