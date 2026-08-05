@@ -34,13 +34,26 @@ public class GeopointeWarmScoringJob implements Queueable, Database.AllowsCallou
 
             convertedAccountId = lead.ConvertedAccountId;
 
+            // FIELD NAME ADAPTER: queries real Salesforce production
+            // field names; sends them to the API under the contract
+            // names that schemas.py and account_features.py expect.
+            // Verified against account_cleaned.parquet (AppFlow
+            // extract from production org, 73,971 accounts):
+            //   Number_of_Sales_Employees__c ✓ (Sales_Team_Size__c absent)
+            //   Total_ARR_Geopointe__c ✓ (Total_GeoPointe_ARR__c absent)
+            //   ARR_Geopointe__c ✓ (ARR_GP__c absent)
+            //   ARR_LevelEleven__c ✓ (ARR_L11__c absent)
+            //   ARR_Licensed_Users_Geopointe__c ✓ (Licensed_Users_GP__c absent)
+            //   ARR_Licensed_Assignment_Areas__c ✓ (Licensed_Areas__c absent)
+            //   Zoom_Clean_SIC_Codes__c preferred (Sic: 68.7% null in prod)
+            //   Zoom_Clean_NAICS_Codes__c preferred (NAICS_Code__c: 77.5% null)
             Account acct = [
                 SELECT
                     Id, Status__c, Type, BillingCountry, BillingState, Industry,
                     AnnualRevenue, NumberOfEmployees, Employee_Range__c,
-                    Secondary_Industry__c, AccountSource, Sales_Team_Size__c,
-                    Current_ARR__c, Total_GeoPointe_ARR__c, ARR_GP__c, ARR_L11__c,
-                    Licensed_Users_GP__c, Licensed_Areas__c, Sic, NAICS_Code__c,
+                    Secondary_Industry__c, AccountSource, Number_of_Sales_Employees__c,
+                    Current_ARR__c, Total_ARR_Geopointe__c, ARR_Geopointe__c, ARR_LevelEleven__c,
+                    ARR_Licensed_Users_Geopointe__c, ARR_Licensed_Assignment_Areas__c, Zoom_Clean_SIC_Codes__c, Zoom_Clean_NAICS_Codes__c,
                     CreatedDate, LastActivityDate, Zoom_Clean_Technology_Products__c
                 FROM Account
                 WHERE Id = :convertedAccountId
@@ -89,15 +102,15 @@ public class GeopointeWarmScoringJob implements Queueable, Database.AllowsCallou
                 'Employee_Range__c' => acct.Employee_Range__c,
                 'Secondary_Industry__c' => acct.Secondary_Industry__c,
                 'AccountSource' => acct.AccountSource,
-                'Sales_Team_Size__c' => acct.Sales_Team_Size__c,
+                'Sales_Team_Size__c' => acct.Number_of_Sales_Employees__c,
                 'Current_ARR__c' => acct.Current_ARR__c,
-                'Total_GeoPointe_ARR__c' => acct.Total_GeoPointe_ARR__c,
-                'ARR_GP__c' => acct.ARR_GP__c,
-                'ARR_L11__c' => acct.ARR_L11__c,
-                'Licensed_Users_GP__c' => acct.Licensed_Users_GP__c,
-                'Licensed_Areas__c' => acct.Licensed_Areas__c,
-                'Sic' => acct.Sic,
-                'NAICS_Code__c' => acct.NAICS_Code__c,
+                'Total_GeoPointe_ARR__c' => acct.Total_ARR_Geopointe__c,
+                'ARR_GP__c' => acct.ARR_Geopointe__c,
+                'ARR_L11__c' => acct.ARR_LevelEleven__c,
+                'Licensed_Users_GP__c' => acct.ARR_Licensed_Users_Geopointe__c,
+                'Licensed_Areas__c' => acct.ARR_Licensed_Assignment_Areas__c,
+                'Sic' => acct.Zoom_Clean_SIC_Codes__c,
+                'NAICS_Code__c' => acct.Zoom_Clean_NAICS_Codes__c,
                 'CreatedDate' => acctCreatedDate,
                 'LastActivityDate' => acctLastActivityDate,
                 'Zoom_Clean_Technology_Products__c' => acct.Zoom_Clean_Technology_Products__c
