@@ -75,3 +75,11 @@ Activity.listView
 **/objects/Account/fields/Licensed_Areas__c.field-meta.xml
 **/objects/Account/fields/NAICS_Code__c.field-meta.xml
 **/objects/Account/fields/Zoom_Clean_Technology_Products__c.field-meta.xml
+**/objects/Account/fields/Number_of_Sales_Employees__c.field-meta.xml
+**/objects/Account/fields/Total_ARR_Geopointe__c.field-meta.xml
+**/objects/Account/fields/ARR_Geopointe__c.field-meta.xml
+**/objects/Account/fields/ARR_LevelEleven__c.field-meta.xml
+**/objects/Account/fields/ARR_Licensed_Users_Geopointe__c.field-meta.xml
+**/objects/Account/fields/ARR_Licensed_Assignment_Areas__c.field-meta.xml
+**/objects/Account/fields/Zoom_Clean_SIC_Codes__c.field-meta.xml
+**/objects/Account/fields/Zoom_Clean_NAICS_Codes__c.field-meta.xml
